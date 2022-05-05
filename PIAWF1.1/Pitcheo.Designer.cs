@@ -285,6 +285,7 @@
             this.btnRegreso.TabIndex = 23;
             this.btnRegreso.Text = "Regresar";
             this.btnRegreso.UseVisualStyleBackColor = true;
+            this.btnRegreso.Click += new System.EventHandler(this.btnRegreso_Click);
             // 
             // Pitcheo
             // 
