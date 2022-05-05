@@ -19,7 +19,10 @@ namespace PIAWF1._1
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            if (txtNombre.Text == "" || txtEntLanzadas.Text == "" || txtHitsPerm.Text == "" || txtCarrerasPerm.Text == "" ||
+            //puedes usar la función string que devuelve un bool, valida si es nulo o vacío 
+            //La mayoría de los textos usa trim() para borrar espacios iniciales o finales, esto es básico en desarrollo al capturar data
+            //Ejemplo con txtNombre, cambia los demás
+            if (string.IsNullOrEmpty(txtNombre.Text.Trim()) || txtEntLanzadas.Text == "" || txtHitsPerm.Text == "" || txtCarrerasPerm.Text == "" ||
                 txtBBPerm.Text == "")
 
             {
@@ -27,6 +30,7 @@ namespace PIAWF1._1
             }
             else
             {
+                //usar try catch, que pasa si meten letras??????
                 double CarrerasPermitidas = Convert.ToDouble(txtCarrerasPerm.Text);
                 double EntradasLanzadas = Convert.ToDouble(txtEntLanzadas.Text);
                 double BasePorBolas = Convert.ToDouble(txtBBPerm.Text);
@@ -44,7 +48,10 @@ namespace PIAWF1._1
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (txtNombre.Text == "" || txtEntLanzadas.Text == "" || txtHitsPerm.Text == "" || txtCarrerasPerm.Text == "" ||
+            //puedes usar la función string que devuelve un bool, valida si es nulo o vacío 
+            //La mayoría de los textos usa trim() para borrar espacios iniciales o finales, esto es básico en desarrollo al capturar data
+            //Ejemplo con txtNombre, cambia los demás
+            if (string.IsNullOrEmpty(txtNombre.Text.Trim()) || txtEntLanzadas.Text == "" || txtHitsPerm.Text == "" || txtCarrerasPerm.Text == "" ||
                 txtBBPerm.Text == "")
 
             {
@@ -61,7 +68,9 @@ namespace PIAWF1._1
 
                 TablaDatosPitcher.Rows.Add(fila);
 
-                txtNombre.Text = "";
+                //De preferencia encapsular en un metodo el limpiado de información, ya que si se requiere en otro lugar ya no se duplica el código
+                //usar propiedad por standar string.empty ejemplo en la siguiente linea
+                txtNombre.Text = string.Empty;
                 txtEntLanzadas.Text = "";
                 txtHitsPerm.Text = "";
                 txtCarrerasPerm.Text = "";

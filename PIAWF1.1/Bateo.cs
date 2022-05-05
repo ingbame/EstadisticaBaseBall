@@ -49,14 +49,18 @@ namespace PIAWF1._1
 
         private void BtnCalcular_Click(object sender, EventArgs e)
         {
-	        if (txtNombre.Text == "" || txtVecesalBat.Text == "" || txtHits.Text == ""|| txtDoubles.Text == ""|| txtTriplets.Text == ""|| txtHR.Text == ""
+            //puedes usar la función string que devuelve un bool, valida si es nulo o vacío 
+            //La mayoría de los textos usa trim() para borrar espacios iniciales o finales, esto es básico en desarrollo al capturar data
+            //Ejemplo con txtNombre, cambia los demás
+            if (string.IsNullOrEmpty(txtNombre.Text.Trim()) || txtVecesalBat.Text == "" || txtHits.Text == "" || txtDoubles.Text == "" || txtTriplets.Text == "" || txtHR.Text == ""
             || txtBaseBolas.Text == "" || txtGolpe.Text == "" || txtSF.Text == "")
-	
+
             {
                 MessageBox.Show("Es necesario esten todos los valores", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
+                //usar try catch, que pasa si meten letras??????
                 double VecesAlBat = Convert.ToDouble(txtVecesalBat.Text);
                 double Hits = Convert.ToDouble(txtHits.Text);
                 double Dobles = Convert.ToDouble(txtDoubles.Text);
@@ -77,7 +81,7 @@ namespace PIAWF1._1
                 double HRSlug = HR * 3;
                 double TotalSlug = Hits + DobletesSlug + TripletesSlug + HRSlug;
 
-                double resultadoSlug = TotalSlug/ VecesAlBat;
+                double resultadoSlug = TotalSlug / VecesAlBat;
                 txtSlugging.Text = resultadoSlug.ToString();
 
                 double resultadoOPS = resultadoSlug + resultadoOBP;
@@ -94,7 +98,10 @@ namespace PIAWF1._1
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (txtNombre.Text == "" || txtVecesalBat.Text == "" || txtHits.Text == "" || txtDoubles.Text == "" || txtTriplets.Text == "" || txtHR.Text == ""
+            //puedes usar la función string que devuelve un bool, valida si es nulo o vacío 
+            //La mayoría de los textos usa trim() para borrar espacios iniciales o finales, esto es básico en desarrollo al capturar data
+            //Ejemplo con txtNombre, cambia los demás
+            if (string.IsNullOrEmpty(txtNombre.Text.Trim()) || txtVecesalBat.Text == "" || txtHits.Text == "" || txtDoubles.Text == "" || txtTriplets.Text == "" || txtHR.Text == ""
             || txtBaseBolas.Text == "" || txtGolpe.Text == "")
 
             {
@@ -112,7 +119,9 @@ namespace PIAWF1._1
 
                 TablaDatos.Rows.Add(fila);
 
-                txtNombre.Text = "";
+                //De preferencia encapsular en un metodo el limpiado de información, ya que si se requiere en otro lugar ya no se duplica el código
+                //usar propiedad por standar string.empty ejemplo en la siguiente linea
+                txtNombre.Text = string.Empty;
                 txtHits.Text = "";
                 txtDoubles.Text = "";
                 txtGolpe.Text = "";
