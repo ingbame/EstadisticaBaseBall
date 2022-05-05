@@ -76,7 +76,7 @@
             this.btnPitcheo.Name = "btnPitcheo";
             this.btnPitcheo.Size = new System.Drawing.Size(91, 44);
             this.btnPitcheo.TabIndex = 3;
-            this.btnPitcheo.Text = "Estaditica de Pitcheo";
+            this.btnPitcheo.Text = "Estadistica de Pitcheo";
             this.btnPitcheo.UseVisualStyleBackColor = true;
             this.btnPitcheo.Click += new System.EventHandler(this.btnPitcheo_Click);
             // 
@@ -125,7 +125,9 @@
             this.Controls.Add(this.btnBateo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "Menu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
