@@ -30,7 +30,7 @@ namespace PIAWF1._1
                 double CarrerasPermitidas = Convert.ToDouble(txtCarrerasPerm.Text);
                 double EntradasLanzadas = Convert.ToDouble(txtEntLanzadas.Text);
                 double BasePorBolas = Convert.ToDouble(txtBBPerm.Text);
-                double Hits = Convert.ToDouble(txtHitsPerm);
+                double Hits = Convert.ToDouble(txtHitsPerm.Text);
 
                 double ERA = CarrerasPermitidas / EntradasLanzadas;
                 txtERA.Text = ERA.ToString();
