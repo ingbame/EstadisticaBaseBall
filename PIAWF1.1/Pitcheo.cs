@@ -70,5 +70,12 @@ namespace PIAWF1._1
                 txtWHIP.Text = "";
             }
         }
+
+        private void btnRegreso_Click(object sender, EventArgs e)
+        {
+            Menu ventana = new Menu();
+            ventana.Show();
+            this.Hide();
+        }
     }
 }
