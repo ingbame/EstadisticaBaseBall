@@ -44,5 +44,13 @@
             }
 
         }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                btnLogin_Click(sender, e);
+            }
+        }
     }
 }
