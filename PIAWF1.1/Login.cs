@@ -2,7 +2,7 @@
 {
     public partial class Login : Form
     {
-        Bateo logeo;
+        Menu logeo;
 
         public Login()
         {
@@ -37,8 +37,10 @@
                 {
                     logeo = new Menu();
                     logeo.Show();
-                    this.Close();
+                    this.Hide();
                 }
+                else
+                    MessageBox.Show("Credenciales invalidas", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

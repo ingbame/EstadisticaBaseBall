@@ -19,12 +19,21 @@ namespace PIAWF1._1
 
         private void btnBateo_Click(object sender, EventArgs e)
         {
-
+            Bateo ventana = new Bateo();
+            ventana.Show();
+            this.Hide();
         }
 
         private void btnPitcheo_Click(object sender, EventArgs e)
         {
+            Pitcheo ventana = new Pitcheo();
+            ventana.Show();
+            this.Hide();
+        }
 
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
