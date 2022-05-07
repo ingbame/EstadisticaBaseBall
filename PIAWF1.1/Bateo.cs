@@ -1,3 +1,6 @@
+using Newtonsoft.Json;
+using PIAWF1._1.Models;
+
 namespace PIAWF1._1
 {
     public partial class Bateo : Form
@@ -71,10 +74,10 @@ namespace PIAWF1._1
                 double SF = Convert.ToDouble(txtSF.Text);
 
                 double resultadoAVG = Hits / VecesAlBat;
-                txtAVG.Text = resultadoAVG.ToString();
-
+                txtAVG.Text = Math.Round(resultadoAVG, 3).ToString();
+           
                 double resultadoOBP = (Hits + Bolas + Golpe) / (VecesAlBat + Bolas + Golpe + SF);
-                txtOBP.Text = resultadoOBP.ToString();
+                txtOBP.Text = Math.Round(resultadoOBP, 3).ToString();
 
                 double DobletesSlug = Dobles;
                 double TripletesSlug = Triples * 2;
@@ -82,10 +85,11 @@ namespace PIAWF1._1
                 double TotalSlug = Hits + DobletesSlug + TripletesSlug + HRSlug;
 
                 double resultadoSlug = TotalSlug / VecesAlBat;
-                txtSlugging.Text = resultadoSlug.ToString();
+                txtSlugging.Text = Math.Round(resultadoSlug, 3).ToString();
 
                 double resultadoOPS = resultadoSlug + resultadoOBP;
-                txtOPS.Text = resultadoOPS.ToString();
+                txtOPS.Text = Math.Round(resultadoOPS, 3).ToString(); 
+
 
             }
 
@@ -98,6 +102,10 @@ namespace PIAWF1._1
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            string JsonBateoRuta = System.IO.Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"Data\EstadisticaBateo.json");
+
+            List<EstadisticaBateoModel> _TablaDatos = JsonConvert.DeserializeObject<List<EstadisticaBateoModel>>(File.ReadAllText(JsonBateoRuta)) ?? new List<EstadisticaBateoModel>();
+
             //puedes usar la función string que devuelve un bool, valida si es nulo o vacío 
             //La mayoría de los textos usa trim() para borrar espacios iniciales o finales, esto es básico en desarrollo al capturar data
             //Ejemplo con txtNombre, cambia los demás
@@ -109,16 +117,21 @@ namespace PIAWF1._1
             }
             else
             {
-                DataGridViewRow fila = new DataGridViewRow();
-                fila.CreateCells(TablaDatos);
-                fila.Cells[0].Value = txtNombre.Text;
-                fila.Cells[1].Value = txtAVG.Text;
-                fila.Cells[2].Value = txtOBP.Text;
-                fila.Cells[3].Value = txtSlugging.Text;
-                fila.Cells[4].Value = txtOPS.Text;
-
-                TablaDatos.Rows.Add(fila);
-
+                EstadisticaBateoModel fila = new EstadisticaBateoModel();
+                //fila.CreateCells(TablaDatos);
+                fila.NombreBateador = txtNombre.Text;
+                
+                fila.AVG = Math.Pow(Math.Round(double.Parse(txtAVG.Text),3),3);
+                fila.OBP = Math.Round(double.Parse(txtOBP.Text),3);
+                fila.SLUG = Math.Round(double.Parse(txtSlugging.Text),3);
+                fila.OPS = Math.Round(double.Parse(txtOPS.Text),3);
+                _TablaDatos.Add(fila);
+                TablaDatos.DataSource = _TablaDatos;
+                TablaDatos.Refresh();
+                
+                var jsonSave = JsonConvert.SerializeObject(_TablaDatos);
+                File.WriteAllText(JsonBateoRuta, jsonSave);
+                
                 //De preferencia encapsular en un metodo el limpiado de información, ya que si se requiere en otro lugar ya no se duplica el código
                 //usar propiedad por standar string.empty ejemplo en la siguiente linea
                 txtNombre.Text = string.Empty;
@@ -158,6 +171,32 @@ namespace PIAWF1._1
             Menu ventana = new Menu();
             ventana.Show();
             this.Hide();
+        }
+
+        private void Bateo_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                string JsonBateoRuta = System.IO.Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"Data\EstadisticaBateo.json");
+                if (!Directory.Exists(System.IO.Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"Data")))
+                {
+                    Directory.CreateDirectory(System.IO.Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"Data"));
+                }
+                if (!File.Exists(JsonBateoRuta))
+                {
+                    File.CreateText(JsonBateoRuta);
+                }     
+                //?? si viene nulo, condiciones ternarios
+                List<EstadisticaBateoModel> _TablaDatos = JsonConvert.DeserializeObject<List<EstadisticaBateoModel>>(File.ReadAllText(JsonBateoRuta))?? new List<EstadisticaBateoModel>();
+                TablaDatos.DataSource = _TablaDatos;
+                TablaDatos.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Concat("No se pudo crear el archivo", ex), "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
         }
     }
 }

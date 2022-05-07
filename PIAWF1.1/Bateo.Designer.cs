@@ -50,11 +50,6 @@
             this.txtGolpe = new System.Windows.Forms.TextBox();
             this.BtnCalcular = new System.Windows.Forms.Button();
             this.TablaDatos = new System.Windows.Forms.DataGridView();
-            this.NOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AVG = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OBP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SLUGGING = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OPS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.txtAVG = new System.Windows.Forms.TextBox();
             this.txtOBP = new System.Windows.Forms.TextBox();
@@ -280,12 +275,6 @@
             // 
             this.TablaDatos.BackgroundColor = System.Drawing.SystemColors.Control;
             this.TablaDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.TablaDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NOMBRE,
-            this.AVG,
-            this.OBP,
-            this.SLUGGING,
-            this.OPS});
             this.TablaDatos.GridColor = System.Drawing.Color.Black;
             this.TablaDatos.Location = new System.Drawing.Point(227, 227);
             this.TablaDatos.Name = "TablaDatos";
@@ -293,36 +282,6 @@
             this.TablaDatos.Size = new System.Drawing.Size(539, 152);
             this.TablaDatos.TabIndex = 20;
             this.TablaDatos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TablaDatos_CellContentClick);
-            // 
-            // NOMBRE
-            // 
-            this.NOMBRE.HeaderText = "NOMBRE";
-            this.NOMBRE.Name = "NOMBRE";
-            this.NOMBRE.ReadOnly = true;
-            // 
-            // AVG
-            // 
-            this.AVG.HeaderText = "AVG";
-            this.AVG.Name = "AVG";
-            this.AVG.ReadOnly = true;
-            // 
-            // OBP
-            // 
-            this.OBP.HeaderText = "OBP";
-            this.OBP.Name = "OBP";
-            this.OBP.ReadOnly = true;
-            // 
-            // SLUGGING
-            // 
-            this.SLUGGING.HeaderText = "SLUGGING";
-            this.SLUGGING.Name = "SLUGGING";
-            this.SLUGGING.ReadOnly = true;
-            // 
-            // OPS
-            // 
-            this.OPS.HeaderText = "OPS";
-            this.OPS.Name = "OPS";
-            this.OPS.ReadOnly = true;
             // 
             // btnAgregar
             // 
@@ -486,6 +445,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Bateo";
             this.Text = "Estadistica de bateo";
+            this.Load += new System.EventHandler(this.Bateo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TablaDatos)).EndInit();
@@ -526,11 +486,6 @@
         private Label label12;
         private Label label13;
         private TextBox txtSF;
-        private DataGridViewTextBoxColumn NOMBRE;
-        private DataGridViewTextBoxColumn AVG;
-        private DataGridViewTextBoxColumn OBP;
-        private DataGridViewTextBoxColumn SLUGGING;
-        private DataGridViewTextBoxColumn OPS;
         private TextBox txtOPS;
         private Label label14;
         private Button btnRegreso;

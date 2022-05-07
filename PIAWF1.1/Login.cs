@@ -1,4 +1,7 @@
-﻿namespace PIAWF1._1
+﻿using Newtonsoft.Json;
+using PIAWF1._1.Models;
+
+namespace PIAWF1._1
 {
     public partial class Login : Form
     {
@@ -31,17 +34,27 @@
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            List<Usuario> usuarios = JsonConvert.DeserializeObject<List<Usuario>>(File.ReadAllText(@"..\Data\Usuarios.json"));
             if ((txtUsuario.Text != "") && (txtPassword.Text != ""))
             {
-                if ((txtUsuario.Text == "Admin") && (txtPassword.Text == "pass123"))
+                var usr = usuarios.Where(w => w.UserName == txtUsuario.Text).FirstOrDefault();
+                if (usr != null) 
                 {
-                    logeo = new Menu();
-                    logeo.Show();
-                    this.Hide();
+                    if (usr.Password == txtPassword.Text)
+                    {
+                        logeo = new Menu();
+                        logeo.Show();
+                        this.Hide();
+                    }
+                    else
+                        MessageBox.Show("Password incorrecto", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+               
                 else
                     MessageBox.Show("Credenciales invalidas", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else
+                MessageBox.Show("Campos vacios", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
