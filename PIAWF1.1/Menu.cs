@@ -35,5 +35,10 @@ namespace PIAWF1._1
         {
             Application.Exit();
         }
+
+        private void Menu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
