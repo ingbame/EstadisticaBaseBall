@@ -33,7 +33,7 @@ namespace PIAWF1._1
             else
             {
                 //usar try catch, que pasa si meten letras??????
-                double CarrerasPermitidas = Convert.ToDouble(txtCarrerasPerm.Text);
+                int CarrerasPermitidas = Convert.ToInt32(txtCarrerasPerm.Text);
                 double EntradasLanzadas = Convert.ToDouble(txtEntLanzadas.Text);
                 double BasePorBolas = Convert.ToDouble(txtBBPerm.Text);
                 double Hits = Convert.ToDouble(txtHitsPerm.Text);
@@ -66,7 +66,7 @@ namespace PIAWF1._1
             else
             {
                 EstadisticaPitcheoModel fila = new EstadisticaPitcheoModel();
-                fila.EntradasLanzadas = int.Parse(txtEntLanzadas.Text);
+                fila.EntradasLanzadas = double.Parse(txtEntLanzadas.Text);
                 fila.HitsPermitidos = int.Parse(txtHitsPerm.Text);
                 fila.CarrerasPerm = int.Parse(txtCarrerasPerm.Text);
                 fila.BasePorBolaPerm = int.Parse(txtBBPerm.Text);

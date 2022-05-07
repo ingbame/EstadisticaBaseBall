@@ -7,7 +7,7 @@ namespace PIAWF1._1.Models
         [DisplayName("Nombre del pitcher")]
         public string NombrePitcher { get; set; }
         [DisplayName("Entradas lanzadas")]
-        public int EntradasLanzadas{ get; set; }
+        public double EntradasLanzadas{ get; set; }
         [DisplayName("Hits permitidos")]
         public int HitsPermitidos { get; set; }
         [DisplayName("Carreras permitidas")]
