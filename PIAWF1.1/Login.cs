@@ -34,7 +34,8 @@ namespace PIAWF1._1
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            List<Usuario> usuarios = JsonConvert.DeserializeObject<List<Usuario>>(File.ReadAllText(@"..\Data\Usuarios.json"));
+            Usuario usrs = new Usuario();
+            List<Usuario> usuarios = usrs.GetUsuarios();
             if ((txtUsuario.Text != "") && (txtPassword.Text != ""))
             {
                 var usr = usuarios.Where(w => w.UserName == txtUsuario.Text).FirstOrDefault();
@@ -48,8 +49,7 @@ namespace PIAWF1._1
                     }
                     else
                         MessageBox.Show("Password incorrecto", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-               
+                }               
                 else
                     MessageBox.Show("Credenciales invalidas", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

@@ -41,9 +41,6 @@
             this.txtCarrerasPerm = new System.Windows.Forms.TextBox();
             this.txtBBPerm = new System.Windows.Forms.TextBox();
             this.TablaDatosPitcher = new System.Windows.Forms.DataGridView();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ERA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WHIP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCalcular = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -167,33 +164,11 @@
             // TablaDatosPitcher
             // 
             this.TablaDatosPitcher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.TablaDatosPitcher.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Nombre,
-            this.ERA,
-            this.WHIP});
             this.TablaDatosPitcher.Location = new System.Drawing.Point(280, 214);
             this.TablaDatosPitcher.Name = "TablaDatosPitcher";
             this.TablaDatosPitcher.RowTemplate.Height = 25;
             this.TablaDatosPitcher.Size = new System.Drawing.Size(342, 187);
             this.TablaDatosPitcher.TabIndex = 14;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // ERA
-            // 
-            this.ERA.HeaderText = "ERA";
-            this.ERA.Name = "ERA";
-            this.ERA.ReadOnly = true;
-            // 
-            // WHIP
-            // 
-            this.WHIP.HeaderText = "WHIP";
-            this.WHIP.Name = "WHIP";
-            this.WHIP.ReadOnly = true;
             // 
             // btnCalcular
             // 
@@ -317,6 +292,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Pitcheo";
             this.Text = "Estadistica de Pitcheo";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Pitcheo_FormClosed);
+            this.Load += new System.EventHandler(this.Pitcheo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TablaDatosPitcher)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -339,9 +316,6 @@
         private TextBox txtCarrerasPerm;
         private TextBox txtBBPerm;
         private DataGridView TablaDatosPitcher;
-        private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewTextBoxColumn ERA;
-        private DataGridViewTextBoxColumn WHIP;
         private Button btnCalcular;
         private Button btnAgregar;
         private Label label7;

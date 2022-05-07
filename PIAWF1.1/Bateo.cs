@@ -118,10 +118,17 @@ namespace PIAWF1._1
             else
             {
                 EstadisticaBateoModel fila = new EstadisticaBateoModel();
-                //fila.CreateCells(TablaDatos);
-                fila.NombreBateador = txtNombre.Text;
                 
-                fila.AVG = Math.Pow(Math.Round(double.Parse(txtAVG.Text),3),3);
+                fila.NombreBateador = txtNombre.Text;
+                fila.VecesAlBat = int.Parse(txtVecesalBat.Text);
+                fila.Hits = int.Parse(txtHits.Text);
+                fila.Dobletes = int.Parse(txtDoubles.Text);
+                fila.Tripletes = int.Parse(txtTriplets.Text);
+                fila.HR = int.Parse(txtHR.Text);
+                fila.BasesPorBola = int.Parse(txtBaseBolas.Text);
+                fila.BasesPorGolpe = int.Parse(txtGolpe.Text);
+                fila.Sacrificios = int.Parse(txtSF.Text);
+                fila.AVG = Math.Round(double.Parse(txtAVG.Text),3);
                 fila.OBP = Math.Round(double.Parse(txtOBP.Text),3);
                 fila.SLUG = Math.Round(double.Parse(txtSlugging.Text),3);
                 fila.OPS = Math.Round(double.Parse(txtOPS.Text),3);
@@ -131,24 +138,28 @@ namespace PIAWF1._1
                 
                 var jsonSave = JsonConvert.SerializeObject(_TablaDatos);
                 File.WriteAllText(JsonBateoRuta, jsonSave);
-                
+
                 //De preferencia encapsular en un metodo el limpiado de información, ya que si se requiere en otro lugar ya no se duplica el código
                 //usar propiedad por standar string.empty ejemplo en la siguiente linea
-                txtNombre.Text = string.Empty;
-                txtHits.Text = "";
-                txtDoubles.Text = "";
-                txtGolpe.Text = "";
-                txtTriplets.Text = "";
-                txtHR.Text = "";
-                txtSF.Text = "";
-                txtVecesalBat.Text = "";
-                txtBaseBolas.Text = "";
-                txtAVG.Text = "";
-                txtOBP.Text = "";
-                txtSlugging.Text = "";
-                txtOPS.Text = "";
 
+                LimpiarCajasTexto();
             }
+        }
+        public void LimpiarCajasTexto()
+        {
+            txtNombre.Text = string.Empty;
+            txtHits.Text = string.Empty;
+            txtDoubles.Text = string.Empty;
+            txtGolpe.Text = string.Empty;
+            txtTriplets.Text = string.Empty;
+            txtHR.Text = string.Empty;
+            txtSF.Text = string.Empty;
+            txtVecesalBat.Text = string.Empty;
+            txtBaseBolas.Text = string.Empty;
+            txtAVG.Text = string.Empty;
+            txtOBP.Text = string.Empty;
+            txtSlugging.Text = string.Empty;
+            txtOPS.Text = string.Empty;
         }
 
         private void txtAVG_TextChanged(object sender, EventArgs e)
@@ -177,6 +188,7 @@ namespace PIAWF1._1
         {
             try
             {
+                List<EstadisticaBateoModel> _TablaDatos = new List<EstadisticaBateoModel>();
                 string JsonBateoRuta = System.IO.Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"Data\EstadisticaBateo.json");
                 if (!Directory.Exists(System.IO.Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), @"Data")))
                 {
@@ -184,12 +196,20 @@ namespace PIAWF1._1
                 }
                 if (!File.Exists(JsonBateoRuta))
                 {
-                    File.CreateText(JsonBateoRuta);
-                }     
-                //?? si viene nulo, condiciones ternarios
-                List<EstadisticaBateoModel> _TablaDatos = JsonConvert.DeserializeObject<List<EstadisticaBateoModel>>(File.ReadAllText(JsonBateoRuta))?? new List<EstadisticaBateoModel>();
+                    var json = JsonConvert.SerializeObject(_TablaDatos);
+                    File.WriteAllText(JsonBateoRuta, json);
+                }
+                else
+                {
+                    //?? si viene nulo, condiciones ternarios
+                    _TablaDatos = JsonConvert.DeserializeObject<List<EstadisticaBateoModel>>(File.ReadAllText(JsonBateoRuta)) ?? new List<EstadisticaBateoModel>();                    
+                }
                 TablaDatos.DataSource = _TablaDatos;
                 TablaDatos.Refresh();
+                TablaDatos.Columns["AVG"].Visible = false;
+                TablaDatos.Columns["OBP"].Visible = false;
+                TablaDatos.Columns["SLUG"].Visible = false;
+                TablaDatos.Columns["OPS"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -197,6 +217,13 @@ namespace PIAWF1._1
 
             }
 
+        }
+
+        private void Bateo_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Menu ventana = new Menu();
+            ventana.Show();
+            this.Hide();
         }
     }
 }

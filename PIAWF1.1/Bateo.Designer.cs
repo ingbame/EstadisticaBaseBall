@@ -445,6 +445,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Bateo";
             this.Text = "Estadistica de bateo";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Bateo_FormClosed);
             this.Load += new System.EventHandler(this.Bateo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
