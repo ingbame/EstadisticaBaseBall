@@ -38,7 +38,7 @@ namespace PIAWF1._1
                 double BasePorBolas = Convert.ToDouble(txtBBPerm.Text);
                 double Hits = Convert.ToDouble(txtHitsPerm.Text);
 
-                double ERA = CarrerasPermitidas / EntradasLanzadas;
+                double ERA = (CarrerasPermitidas / EntradasLanzadas) * 9;
                 txtERA.Text = Math.Round(ERA, 3).ToString();
 
                 double WHIP = (BasePorBolas + Hits) / EntradasLanzadas;
